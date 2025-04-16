@@ -1,0 +1,91 @@
+
+
+            <!DOCTYPE html>
+            <html lang="pt-br">
+            <head>
+                <meta charset="UTF-8">
+                <title>Histórico de Notificações - Arm-Alfa</title>
+                <link rel="stylesheet" href="css/style.css">
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        padding: 30px;
+                        background-color: #f4f4f4;
+                    }
+            
+                    h1 {
+                        color: #ff6600;
+                        text-align: center;
+                    }
+            
+                    .notificacao {
+                        background: #fff3e0;
+                        padding: 15px;
+                        border-left: 6px solid #ff9800;
+                        margin-bottom: 10px;
+                        border-radius: 8px;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                    }
+            
+                    .data {
+                        font-size: 12px;
+                        color: #666;
+                    }
+                </style>
+                <meta name="viewport" content="width=device-width,initial-scale=1">
+                <meta http-equiv="content-language" content="pt-br" />
+                <meta name="robots" content="index, follow"/>
+                
+                <!--[if lt IE 9]>
+                    <script src="js/html5shiv.js"></script>
+                <![endif]-->       
+            
+                <link rel="stylesheet" type="text/css" href="css/boot.css">
+                <link rel="stylesheet" type="text/css" href="css/style.css">
+                <link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
+                <link rel="stylesheet" type="text/css" href="css/fonts-icones.css">
+                <link rel="shortcut icon" href="img/favicon.png" type="image/ico" />
+            
+                <title>Arm-alfa</title>
+            </head>
+            <body>
+                <body > <div class="main_header_logo">
+                    <a href="index.html" title="arm-alfa"><img src="img/Logo_Armengersnobg.png" alt="arm-alfa" title=" Arm-alfa"/></a>
+                </div>
+              
+                <li class="main_header_nav_item"><a href="./index.html" class="scrollSuave menuAtivo" title="Início"> Início</a></li>
+                <li class="main_header_nav_item"><a href="./Agora.html" class="scrollSuave" title="agora"> Agora</a></li>
+                <li class="main_header_nav_item"><a href="./historico.html" class="scrollSuave" title="historico"> Histórico</a></li>
+                <li class="main_header_nav_item"><a href="./Ajustes.html" class="scrollSuave" title="ajustes"> Ajustes</a></li>
+                <li class="main_header_nav_item"><a href="./index.html#contato" class="scrollSuave" title="Contato"> Contato</a></li>
+                <li class="main_header_nav_item"><a href="./sobre.html" class="scrollSuave" title="Contato"> Sobre</a></li>
+                    
+                    <footer class="footer" id="contato">
+                      
+                <h1>Histórico de Notificações</h1>
+                <div id="historicoContainer"></div>
+            
+                <script>
+                    const container = document.getElementById("historicoContainer");
+                    const notificacoes = JSON.parse(localStorage.getItem("historicoNotificacoes")) || [];
+            
+                    if (notificacoes.length === 0) {
+                        container.innerHTML = "<p>Nenhuma notificação registrada ainda.</p>";
+                    } else {
+                        notificacoes.forEach(n => {
+                            const div = document.createElement("div");
+                            div.className = "notificacao";
+                            div.innerHTML = `<strong>Mensagem:</strong> ${n.mensagem}<br><span class="data">${n.data}</span>`;
+                            container.appendChild(div);
+                        });
+                    }
+                </script>
+            
+            </body>
+            </html>
+            
+        </footer> 
+        
+  
+</body>
+</html>

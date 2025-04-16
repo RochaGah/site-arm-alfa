@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="content-language" content="pt-br" />
+    <meta name="robots" content="index, follow"/>
+    
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+    <![endif]-->       
+
+	<link rel="stylesheet" type="text/css" href="css/boot.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="css/fonts-icones.css">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/ico" />
+
+	<title>Arm-Alfa</title>
+
+</head>
+<body>
+    <body > <div class="main_header_logo">
+        <a href="index.html" title="Arm-Alfa"><img src="img/Logo_Armengersnobg.png" alt="arm-alfa" title="Arm-Alfa"/></a>
+    </div>
+     
+    <li class="main_header_nav_item"><a href="./index.html" class="scrollSuave menuAtivo" title="Início"> Início</a></li>
+    <li class="main_header_nav_item"><a href="./Agora.html" class="scrollSuave" title="agora"> Agora</a></li>
+    <li class="main_header_nav_item"><a href="./historico.html" class="scrollSuave" title="historico"> Histórico</a></li>
+    <li class="main_header_nav_item"><a href="./Ajustes.html" class="scrollSuave" title="ajustes"> Ajustes</a></li>
+    <li class="main_header_nav_item"><a href="./index.html#contato" class="scrollSuave" title="Contato"> Contato</a></li>
+    <li class="main_header_nav_item"><a href="./sobre.html" class="scrollSuave" title="Contato"> Sobre</a></li>
+    
+
+        
+        <section id="Agora" class="section-agora container">
+            
+        <div class="content">
+            
+            <h2 class="title center roxo">Agora</h2>
+
+            <div class="Agora">
+               
+                <section id="notificacoes" class="section-notificacoes container">
+                    <div class="content">
+                        <button id="conectarBluetooth">Conectar via Bluetooth</button>
+                        <div id="mensagemBluetooth" class="mensagem-box">
+                            Aguardando conexão...
+                        </div>
+                    </div>
+                </section>
+            
+        <div class="clear"></div>
+        </div>
+
+    </section><!--Fecha Section Galeria-->
+
+    <script>
+        const botaoConectar = document.getElementById("conectarBluetooth");
+        const mensagemBox = document.getElementById("mensagemBluetooth");
+    
+        let bluetoothDevice;
+    
+        botaoConectar.addEventListener("click", async () => {
+            try {
+                bluetoothDevice = await navigator.bluetooth.requestDevice({
+                    filters: [{ namePrefix: 'ArmAlfa' }], // ou use { services: ['uuid-aqui'] }
+                    optionalServices: ['battery_service', 'device_information'] // adicione seu service UUID aqui
+                });
+    
+                const server = await bluetoothDevice.gatt.connect();
+    
+                // Aqui você deve substituir por seu UUID e característica personalizada
+                const service = await server.getPrimaryService('battery_service');
+                const characteristic = await service.getCharacteristic('battery_level');
+    
+                // Leitura inicial (exemplo)
+                const value = await characteristic.readValue();
+                mensagemBox.textContent = "Mensagem recebida: " + value.getUint8(0) + "%";
+    
+                // Se quiser ouvir mudanças em tempo real:
+                characteristic.addEventListener('characteristicvaluechanged', (event) => {
+                    const valor = event.target.value.getUint8(0);
+                    mensagemBox.textContent = "Nova notificação: " + valor;
+                });
+    
+                characteristic.startNotifications();
+    
+            } catch (error) {
+                console.error(error);
+                mensagemBox.textContent = "Erro na conexão Bluetooth.";
+            }
+            function salvarNotificacao(valor) {
+    const notificacoes = JSON.parse(localStorage.getItem("historicoNotificacoes")) || [];
+    const novaNotificacao = {
+        mensagem: valor,
+        data: new Date().toLocaleString()
+    };
+    notificacoes.push(novaNotificacao);
+    localStorage.setItem("historicoNotificacoes", JSON.stringify(notificacoes));
+}
+characteristic.addEventListener('characteristicvaluechanged', (event) => {
+    const valor = event.target.value.getUint8(0);
+    mensagemBox.textContent = "Nova notificação: " + valor;
+    mensagemBox.classList.add("success");
+    salvarNotificacao(valor);
+});
+        });
+    </script>
+    
+</body>
+</html>
