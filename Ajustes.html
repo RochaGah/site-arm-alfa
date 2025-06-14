@@ -1,120 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta http-equiv="content-language" content="pt-br" />
-    <meta name="robots" content="index, follow"/>
-    
-    <!--[if lt IE 9]>
-        <script src="js/html5shiv.js"></script>
-    <![endif]-->       
+    <meta name="robots" content="index, follow" />
 
-	<link rel="stylesheet" type="text/css" href="css/boot.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
-    <link rel="stylesheet" type="text/css" href="css/fonts-icones.css">
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="css/boot.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/magnific-popup.css" />
+    <link rel="stylesheet" type="text/css" href="css/fonts-icones.css" />
     <link rel="shortcut icon" href="img/favicon.png" type="image/ico" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f9f9f9;
-            padding: 20px;
+      body {
+        font-family: Arial, sans-serif;
+        background: #f9f9f9;
+        padding: 20px;
+      }
+      .ajustes-container {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        max-width: 600px;
+        margin: auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        text-align: center;
+      }
+      label {
+        display: block;
+        margin: 15px 0 5px;
+      }
+      input[type="range"],
+      select {
+        width: 100%;
+      }
+      .vibracao-preview {
+        margin-top: 20px;
+        text-align: center;
+      }
+      .pulseira {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        background: #ddd;
+        border-radius: 50%;
+        line-height: 100px;
+        font-weight: bold;
+        animation: none;
+      }
+      .vibrando {
+        animation: vibrar 0.3s infinite;
+      }
+      @keyframes vibrar {
+        0% {
+          transform: translateX(0);
         }
-        .ajustes-container {
-            background: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            max-width: 600px;
-            margin: auto;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        25% {
+          transform: translateX(-5px);
         }
-        h2 {
-            text-align: center;
+        50% {
+          transform: translateX(5px);
         }
-        label {
-            display: block;
-            margin: 15px 0 5px;
+        75% {
+          transform: translateX(-5px);
         }
-        input[type="range"], select {
-            width: 100%;
+        100% {
+          transform: translateX(0);
         }
-        .vibracao-preview {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .pulseira {
-            display: inline-block;
-            width: 100px;
-            height: 100px;
-            background: #ddd;
-            border-radius: 50%;
-            line-height: 100px;
-            font-weight: bold;
-            animation: none;
-        }
-        .vibrando {
-            animation: vibrar 0.3s infinite;
-        }
-        @keyframes vibrar {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
-            100% { transform: translateX(0); }
-        }
+      }
     </style>
-	<title>ARM-ALFA</title>
-</head>
-<body>
+    <title>Pulseira Háptica</title>
+  </head>
+  <body>
     <div class="main_header_logo">
-        <a href="index.html" title="Arm-alfa"><img src="img/Logo_Armengersnobg.png" alt="café Rigno" title="Restaurante Serve Bem"/></a>
+      <a href="index.html" title="Arm-alfa"
+        ><img
+          src="img/Logo_Armengersnobg.png"
+          alt="café Rigno"
+          title="Restaurante Serve Bem"
+      /></a>
     </div>
-   
-    <li class="main_header_nav_item"><a href="./index.html" class="scrollSuave menuAtivo" title="Início"> Início</a></li>
-    <li class="main_header_nav_item"><a href="./Agora.html" class="scrollSuave" title="agora"> Agora</a></li>
-    <li class="main_header_nav_item"><a href="./historico.html" class="scrollSuave" title="historico"> Histórico</a></li>
-    <li class="main_header_nav_item"><a href="./Ajustes.html" class="scrollSuave" title="ajustes"> Ajustes</a></li>
-    <li class="main_header_nav_item"><a href="./index.html#contato" class="scrollSuave" title="Contato"> Contato</a></li>
-    <li class="main_header_nav_item"><a href="./sobre.html" class="scrollSuave" title="Contato"> Sobre</a></li>
-   
-        
-        <footer class="footer" id="contato">
-        
-            <div class="ajustes-container">
-                <h2>Ajustes da Pulseira ARM-ALFA</h2>
-        
-                <label for="sensibilidade">Sensibilidade ao Som:</label>
-                <input type="range" id="sensibilidade" min="1" max="10" value="5">
-        
-                <label for="vibracao">Intensidade da Vibração:</label>
-                <input type="range" id="vibracao" min="1" max="10" value="5">
-        
-                <label for="modo">Modo de Resposta:</label>
-                <select id="modo">
-                    <option value="contínuo">Contínuo</option>
-                    <option value="pulsante">Pulsante</option>
-                    <option value="curto">Curto Toque</option>
-                </select>
-        
-                <div class="vibracao-preview">
-                    <p>Prévia da Vibração:</p>
-                    <div id="pulseira" class="pulseira">🔈</div><br>
-                    <button onclick="testarVibracao()">Testar</button>
-                </div>
-            </div>
-        
-            <script>
-                function testarVibracao() {
-                    const pulseira = document.getElementById("pulseira");
-                    pulseira.classList.add("vibrando");
-                    setTimeout(() => {
-                        pulseira.classList.remove("vibrando");
-                    }, 1000);
-                }
-            </script>
-        
-    
-        </footer>   
-</body>
+
+    <li class="main_header_nav_item">
+      <a href="./index.html" class="scrollSuave menuAtivo" title="Início">
+        Início</a
+      >
+    </li>
+    <li class="main_header_nav_item">
+      <a href="./Agora.html" class="scrollSuave" title="agora"> Agora</a>
+    </li>
+    <li class="main_header_nav_item">
+      <a href="./historico.html" class="scrollSuave" title="historico">
+        Histórico</a
+      >
+    </li>
+    <li class="main_header_nav_item">
+      <a href="./Ajustes.html" class="scrollSuave" title="ajustes"> Ajustes</a>
+    </li>
+    <li class="main_header_nav_item">
+      <a href="./index.html#contato" class="scrollSuave" title="Contato">
+        Contato</a
+      >
+    </li>
+    <li class="main_header_nav_item">
+      <a href="./sobre.html" class="scrollSuave" title="Contato"> Sobre</a>
+    </li>
+
+    <footer class="footer" id="contato">
+      <div class="ajustes-container">
+        <h2>Ajustes da Pulseira Háptica</h2>
+
+        <label for="sensibilidade">Sensibilidade ao Som:</label>
+        <input type="range" id="sensibilidade" min="1" max="10" value="5" />
+
+        <label for="vibracao">Intensidade da Vibração:</label>
+        <input type="range" id="vibracao" min="1" max="10" value="5" />
+
+        <label for="modo">Modo de Resposta:</label>
+        <select id="modo">
+          <option value="contínuo">Contínuo</option>
+          <option value="pulsante">Pulsante</option>
+          <option value="curto">Curto Toque</option>
+        </select>
+
+        <div class="vibracao-preview">
+          <p>Prévia da Vibração:</p>
+          <div id="pulseira" class="pulseira">🔈</div>
+          <br />
+          <button onclick="testarVibracao()">Testar</button>
+        </div>
+      </div>
+
+      <script>
+        function testarVibracao() {
+          const pulseira = document.getElementById("pulseira");
+          pulseira.classList.add("vibrando");
+          setTimeout(() => {
+            pulseira.classList.remove("vibrando");
+          }, 1000);
+        }
+      </script>
+    </footer>
+  </body>
 </html>
